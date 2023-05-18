@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util. Scanner;
 
 public class PersonalInfo {
     private String surname;
@@ -10,38 +9,6 @@ public class PersonalInfo {
     private String phoneNumber;
     private String gender;
 
-    public PersonalInfo() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Введите вашу личную информацию в случайном порядке, разделяя пробелом:");
-
-        String input = scanner.nextLine();
-
-        String[] tokens = input.split(" ");
-
-        for (String token : tokens) {
-            System.out.println(token);
-            String regDate = "\\d{2}\\.\\d{2}\\.\\d{4}";
-            String regPhone = "\\d{10}";
-            String regName = "[А-ЯA-Z][а-яa-z]*";
-
-            if (token.matches(regDate)) {
-                dateOfBirth = token;
-            } else if (token.matches(regPhone)) {
-                phoneNumber = token;
-            } else if (token.equalsIgnoreCase("m") || token.equalsIgnoreCase("f")) {
-                gender = token.toLowerCase();
-            } else if (token.matches(regName)) {
-                if (surname == null) {
-                    surname = token;
-                } else if (firstName == null) {
-                    firstName = token;
-                } else if (middleName == null) {
-                    middleName = token;
-                }
-            }
-        }
-    }
 
     public String getSurname() {
         return surname;
@@ -67,6 +34,29 @@ public class PersonalInfo {
         return gender;
     }
 
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
     @Override
     public String toString() {
         return "Фамилия: " + surname +
@@ -76,7 +66,18 @@ public class PersonalInfo {
                 "\nНомер телефона: " + phoneNumber +
                 "\nПол: " + gender;
     }
+
+    public boolean fullfill () throws CustomExeption{
+        if (surname != null &
+                firstName != null &
+                middleName != null &
+                dateOfBirth != null &
+                phoneNumber != null &
+                gender != null
+        ) {
+            return true;
+        }
+        new CustomExeption("Введены некорректные даныые, попробуйте еще раз");
+        return false;
+    }
 }
-
-
-
